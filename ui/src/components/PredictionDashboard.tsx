@@ -3,7 +3,7 @@ import { useAccount, useReadContract, usePublicClient } from 'wagmi';
 import { Contract, JsonRpcSigner, formatEther, isAddress, parseEther } from 'ethers';
 import { useEthersSigner } from '../hooks/useEthersSigner';
 import { useZamaInstance } from '../hooks/useZamaInstance';
-import { CONTRACT_ADDRESS, CONTRACT_ABI, ZERO_ADDRESS } from '../config/contracts';
+import { CONTRACT_ADDRESS, CONTRACT_ABI } from '../config/contracts';
 import '../styles/PredictionDashboard.css';
 
 type PredictionSummary = {
@@ -37,7 +37,7 @@ export function PredictionDashboard({ refreshKey }: DashboardProps) {
   const signerPromise = useEthersSigner();
   const { instance, isLoading: zamaLoading, error: zamaError } = useZamaInstance();
   const publicClient = usePublicClient();
-  const isContractReady = isAddress(CONTRACT_ADDRESS) && CONTRACT_ADDRESS !== ZERO_ADDRESS;
+  const isContractReady = isAddress(CONTRACT_ADDRESS);
 
   const [selectedPredictionId, setSelectedPredictionId] = useState<bigint | null>(null);
   const [selectedOptionIndex, setSelectedOptionIndex] = useState<number | null>(null);
@@ -97,7 +97,7 @@ export function PredictionDashboard({ refreshKey }: DashboardProps) {
   }, [predictions]);
 
   const loadOnChainData = async (predictionId?: bigint) => {
-    if (!publicClient || !isAddress(CONTRACT_ADDRESS) || CONTRACT_ADDRESS === ZERO_ADDRESS) {
+    if (!publicClient || !isAddress(CONTRACT_ADDRESS)) {
       return;
     }
     const targetId = predictionId ?? selectedPredictionId;
@@ -162,7 +162,7 @@ export function PredictionDashboard({ refreshKey }: DashboardProps) {
       setBetError('Ensure your wallet and encryption service are ready.');
       return;
     }
-    if (!isAddress(CONTRACT_ADDRESS) || CONTRACT_ADDRESS === ZERO_ADDRESS) {
+    if (!isAddress(CONTRACT_ADDRESS)) {
       setBetError('Contract address is missing. Deploy the contract first.');
       return;
     }

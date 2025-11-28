@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { Contract, isAddress, JsonRpcSigner } from 'ethers';
 import { useEthersSigner } from '../hooks/useEthersSigner';
-import { CONTRACT_ADDRESS, CONTRACT_ABI, ZERO_ADDRESS } from '../config/contracts';
+import { CONTRACT_ADDRESS, CONTRACT_ABI } from '../config/contracts';
 import '../styles/CreatePredictionForm.css';
 
 type Props = {
@@ -66,7 +66,7 @@ export function CreatePredictionForm({ onCreated }: Props) {
       return;
     }
 
-    if (!isAddress(CONTRACT_ADDRESS) || CONTRACT_ADDRESS === ZERO_ADDRESS) {
+    if (!isAddress(CONTRACT_ADDRESS)) {
       setErrorMessage('Contract address is not set. Deploy the contract before using the app.');
       return;
     }
