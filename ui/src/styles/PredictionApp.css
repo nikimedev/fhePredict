@@ -1,0 +1,41 @@
+.app-shell {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #312e81);
+  color: #f8fafc;
+}
+
+.app-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+.tab-navigation {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.tab-button {
+  flex: 1;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.tab-button.active {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+@media (max-width: 720px) {
+  .tab-navigation {
+    flex-direction: column;
+  }
+}
